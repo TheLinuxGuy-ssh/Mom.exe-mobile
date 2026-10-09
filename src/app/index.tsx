@@ -1,98 +1,73 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
-  return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+import Button from "@/components/ui/button";
+import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+    <SafeAreaView style={styles.container}>
+      <View className="flex flex-2 justify-center items-start">
+        <Text>For Everyone Who</Text>
+        <Text className="font-display font-bold text-4xl uppercase leading-[0.88] tracking-tighter max-w-[9ch] text-[clamp(3.5rem,13vw,10rem)]">
+          Moved out
+        </Text>
+      </View>
+      <View className="flex flex-1 justify-center items-center">
+        <Text className="font-display font-bold text-5xl uppercase leading-[0.88] tracking-tighter max-w-[9ch] text-[clamp(3.5rem,13vw,10rem)]">
+          TITLE
+        </Text>
+      </View>
+      <View>
+        {/* <LottieView source={require("/assets/palmdancing.lottie")}></LottieView> */}
+      </View>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+      <View className="flex flex-2 items-center w-full justify-end">
+        <Button>CHECK IN!</Button>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    flexDirection: "column",
+    padding: 20,
+    backgroundColor: "#fff4dc",
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+  shadowContainer: {
+    position: "relative",
+    width: "100%",
+    height: 56,
   },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+  brutalShadow: {
+    position: "absolute",
+    top: 5,
+    left: 0,
+    right: 0,
+    bottom: -5,
+    backgroundColor: "#211713",
+    borderRadius: 9999,
   },
-  title: {
-    textAlign: 'center',
+  animatedWrapper: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
-  code: {
-    textTransform: 'uppercase',
+  btn: {
+    width: "100%",
+    height: "100%",
+    borderWidth: 2,
+    borderColor: "#211713",
+    borderRadius: 9999,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  btnText: {
+    color: "#211713",
+    fontWeight: "900",
+    textTransform: "uppercase",
+    letterSpacing: 1,
   },
 });
