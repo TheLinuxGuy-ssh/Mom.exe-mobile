@@ -107,7 +107,8 @@ export default function HistoryScreen() {
                           <Feather name="calendar" size={14} color={C.brown} />
                           <Text style={styles.entryTitle}>plan</Text>
                           <Text style={styles.entryMeta}>
-                            {e.plan.basis} data, {e.plan.model_id}
+                            {e.plan.basis} data,{" "}
+                            {e.plan.model_id === "template" ? "planned the simple way" : "mom’s mind"}
                           </Text>
                         </View>
                         <Text style={styles.entrySummary} numberOfLines={1}>

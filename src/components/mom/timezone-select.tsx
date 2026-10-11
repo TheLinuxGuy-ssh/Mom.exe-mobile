@@ -145,6 +145,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "600",
     color: C.ink,
+    includeFontPadding: false,
+    textAlignVertical: "center",
   },
   option: {
     flexDirection: "row",

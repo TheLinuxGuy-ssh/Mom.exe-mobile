@@ -287,6 +287,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 18,
     color: C.ink,
+    includeFontPadding: false,
     textAlignVertical: "top",
   },
 });

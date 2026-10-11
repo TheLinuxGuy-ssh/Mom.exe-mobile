@@ -18,7 +18,7 @@ const STEPS = ["you", "age", "body", "class", "sleep", "people", "food", "caffei
 
 const STEP_LABELS: Record<(typeof STEPS)[number], { title: string; hint: string }> = {
   you: { title: "FIRST, A NAME (OR NOT)", hint: "what should mom call you? any nickname works." },
-  age: { title: "WHICH BATCH ARE YOU?", hint: "birth year is enough. the AI only ever sees your age band." },
+  age: { title: "WHICH BATCH ARE YOU?", hint: "birth year is enough. mom only ever sees your age band." },
   body: { title: "OPTIONAL STUFF", hint: "height and weight, only if you want. no calorie talk, ever." },
   class: { title: "WHEN IS CLASS?", hint: "usual first class start time." },
   sleep: { title: "BED TIME. YES, AN ACTUAL TIME.", hint: "targets, not demands." },
@@ -385,6 +385,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     color: C.ink,
+    includeFontPadding: false,
+    textAlignVertical: "center",
   },
   fieldLabel: {
     fontSize: 11,

@@ -191,8 +191,8 @@ export function Composer({
         )}
         {busy && (
           <Text style={styles.busyText}>
-            hosted open-weight models think for 10-25s before answering. if it takes too long, i plan
-            in code instead and you still get a real plan.
+            mom thinks for 10-25s before answering. if it takes too long, i plan the simple way
+            instead and you still get a real plan.
           </Text>
         )}
       </View>
@@ -226,6 +226,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 30,
     color: C.ink,
+    includeFontPadding: false,
     textAlignVertical: "top",
   },
   chipRow: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 10 },

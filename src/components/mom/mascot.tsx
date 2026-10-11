@@ -106,7 +106,7 @@ export function Mascot({ size = 220, labels = true }: { size?: number; labels?: 
       {labels && (
         <>
           <FloatyChip text="no streaks" bg={C.lime} style={styles.chipLeft} reduce={reduce} />
-          <FloatyChip text="open weights" bg={C.blue} style={styles.chipRight} reduce={reduce} />
+          <FloatyChip text="mom’s mind" bg={C.blue} style={styles.chipRight} reduce={reduce} />
           <FloatyChip text="plans anyway" bg={C.pink} textColor={C.paper} style={styles.chipBottom} reduce={reduce} />
         </>
       )}

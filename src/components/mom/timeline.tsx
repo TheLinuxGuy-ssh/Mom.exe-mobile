@@ -103,7 +103,8 @@ export function Timeline({
         <View style={styles.noteRow}>
           <Feather name="wifi-off" size={14} color={C.brown} />
           <Text style={styles.noteText}>
-            planned in code, not by the model. {plan.fallback_reason ?? "the model was unreachable"}
+            planned the simple way, not by mom’s mind.{" "}
+            {plan.fallback_reason ?? "mom’s mind was busy"}
           </Text>
         </View>
       )}

@@ -346,7 +346,7 @@ export default function HomeScreen() {
         if (!result.advice) {
           toast(
             result.fallbackReason
-              ? "mom could not reach the model, try again"
+              ? "mom could not gather her thoughts, try again"
               : "mom had nothing to say",
             "warn",
           );
@@ -416,7 +416,7 @@ export default function HomeScreen() {
         setChatOpen(false);
 
       if (result.usedTemplate)
-        toast("planned in code. the model was unreachable", "warn");
+        toast("planned the simple way. mom’s mind was busy", "warn");
       else toast("noted. planned.");
       return true;
     } catch (e) {
@@ -615,7 +615,7 @@ export default function HomeScreen() {
         {busy && !plan ? (
           <PlanSkeleton
             counter={waited}
-            note="open-weight models think for 10-25s before answering. if it takes too long, i plan in code instead and you still get a real plan."
+            note="mom thinks for 10-25s before answering. if it takes too long, i plan the simple way instead and you still get a real plan."
           />
         ) : plan ? (
           <Timeline

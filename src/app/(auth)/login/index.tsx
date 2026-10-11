@@ -229,6 +229,7 @@ function CodeBoxes({
         style={{
           flexDirection: "row",
           gap: 8,
+          justifyContent: "center",
           transform: [{ translateX: shake }],
         }}
       >
@@ -646,8 +647,8 @@ export default function LoginScreen() {
                   {busy ? "SENDING..." : "CHECK IN"}
                 </Button>
                 <Text style={styles.fine} maxFontSizeMultiplier={1.2}>
-                  Mom.exe is a wellness coach, not medical advice. Anonymized
-                  context goes to an open weight model.
+                  Mom.exe is a wellness coach, not medical advice. your nickname and
+                  notes reach mom’s mind so she can plan your day.
                 </Text>
               </>
             ) : (
@@ -754,9 +755,12 @@ const styles = StyleSheet.create({
   input: {
     height: 56,
     paddingHorizontal: 16,
+    paddingVertical: 0,
     fontSize: 17,
     fontWeight: "600",
     color: C.ink,
+    includeFontPadding: false,
+    textAlignVertical: "center",
   },
   status: {
     minHeight: 20,
@@ -767,7 +771,8 @@ const styles = StyleSheet.create({
   },
   codeBox: {
     flex: 1,
-    height: 60,
+    aspectRatio: 1,
+    maxWidth: 52,
     borderWidth: 2,
     borderColor: C.ink,
     borderRadius: 12,
@@ -782,9 +787,10 @@ const styles = StyleSheet.create({
     borderColor: C.warn,
   },
   codeDigit: {
-    fontSize: 26,
+    fontSize: 22,
     fontWeight: "800",
     color: C.ink,
+    includeFontPadding: false,
   },
   codeInput: {
     opacity: 0,

@@ -242,8 +242,8 @@ export default function SettingsScreen() {
         </Card>
 
         <Text style={styles.fine}>
-          Mom.exe is a wellness coach, not medical advice. anonymized context (no name, email or birth
-          date) is sent to an open-weight model. MIT licensed.
+          Mom.exe is a wellness coach, not medical advice. your nickname and notes reach mom’s mind
+          so she can plan your day. MIT licensed.
         </Text>
 
         <Eyebrow color="rgba(33,23,19,0.4)">wellness coach, not medical advice</Eyebrow>
@@ -317,6 +317,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "600",
     color: C.ink,
+    includeFontPadding: false,
+    textAlignVertical: "center",
   },
   choiceWrap: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
   choice: {
