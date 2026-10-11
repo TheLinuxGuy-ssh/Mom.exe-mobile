@@ -3,10 +3,11 @@ import { Animated, Pressable, StyleSheet, Text, View } from "react-native";
 
 type BProps = {
   children: ReactNode;
+  className?: String;
   onPress?: () => void;
 };
 
-const Button = ({ children, onPress }: BProps) => {
+const Button = ({ children, className, onPress }: BProps) => {
   const animValue = useRef(new Animated.Value(0)).current;
 
   const handlePressIn = () => {
@@ -25,7 +26,7 @@ const Button = ({ children, onPress }: BProps) => {
     }).start();
   };
   return (
-    <View style={styles.shadowContainer}>
+    <View className={`${className}`} style={styles.shadowContainer}>
       <View style={styles.brutalShadow} />
       <Animated.View
         style={[
@@ -39,7 +40,7 @@ const Button = ({ children, onPress }: BProps) => {
           onPressIn={handlePressIn}
           onPressOut={handlePressOut}
           onPress={onPress}
-          className="!bg-[#c7ff4d] w-full !rounded-full px-7 py-4 text-sm font-black uppercase tracking-wide flex items-center gap-2"
+          className="w-full !rounded-full px-7 py-4 text-sm font-black uppercase tracking-wide flex items-center gap-2"
           style={styles.btn}
         >
           <Text style={styles.btnText}>{children}</Text>
@@ -79,6 +80,7 @@ const styles = StyleSheet.create({
     borderRadius: 9999,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#c7ff4d",
   },
   btnText: {
     color: "#211713",

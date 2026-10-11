@@ -26,12 +26,18 @@
     },
     "plugins": [
       "expo-router",
+      "@lottiefiles/dotlottie-react-native/plugin",
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 76
+          "backgroundColor": "#fff4dc",
+          "image": "./assets/images/splash-mug.png",
+          "imageWidth": 168,
+          "dark": {
+            "backgroundColor": "#fff4dc",
+            "image": "./assets/images/splash-mug.png",
+            "imageWidth": 168
+          }
         }
       ]
     ],
