@@ -1,8 +1,16 @@
 import { Feather } from "@expo/vector-icons";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  useWindowDimensions,
+  View,
+} from "react-native";
 
-import { Modal } from "@/components/mom/modal";
+import { BottomSheet } from "@/components/mom/bottom-sheet";
 import { BrutalButton } from "@/components/mom/primitives";
 import { BORDER, C, FONT, R } from "@/constants/mom";
 import { bubbleDelay, splitBubbles } from "@/lib/engine/bubbles";
@@ -37,6 +45,8 @@ export function ConversationDialog({
   const [revealed, setRevealed] = useState(0);
   const [parts, setParts] = useState<string[]>([]);
   const scroller = useRef<ScrollView>(null);
+  const { height: windowH } = useWindowDimensions();
+  const sheetMaxH = windowH * 0.9;
 
   const shown = useMemo(() => {
     const echoed =
@@ -104,8 +114,11 @@ export function ConversationDialog({
   }
 
   return (
-    <Modal open={open} onClose={onclose} dismissible={!busy && !settling} align="sheet">
-      <View style={styles.sheet} accessibilityViewIsModal>
+    <BottomSheet open={open} onClose={onclose} dismissible={!busy && !settling}>
+      <View style={[styles.sheet, { maxHeight: sheetMaxH }]} accessibilityViewIsModal>
+        <View style={styles.grab}>
+          <View style={styles.handle} />
+        </View>
         <View style={styles.header}>
           <Text style={styles.headerText}>talking to mom</Text>
           <Pressable onPress={onclose} hitSlop={10} style={styles.closeBtn} accessibilityLabel="close conversation">
@@ -179,13 +192,12 @@ export function ConversationDialog({
           </BrutalButton>
         </View>
       </View>
-    </Modal>
+    </BottomSheet>
   );
 }
 
 const styles = StyleSheet.create({
   sheet: {
-    maxHeight: "90%",
     width: "100%",
     backgroundColor: C.paper,
     borderTopWidth: BORDER,
@@ -195,6 +207,17 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: R.xl,
     borderTopRightRadius: R.xl,
     overflow: "hidden",
+  },
+  grab: {
+    alignItems: "center",
+    paddingTop: 8,
+    paddingBottom: 4,
+  },
+  handle: {
+    width: 44,
+    height: 5,
+    borderRadius: 9999,
+    backgroundColor: "rgba(33,23,19,0.28)",
   },
   header: {
     flexDirection: "row",
@@ -219,7 +242,7 @@ const styles = StyleSheet.create({
     borderColor: C.ink,
     borderRadius: R.pill,
   },
-  scroll: { maxHeight: 460 },
+  scroll: { maxHeight: 460, flexShrink: 1 },
   scrollContent: { paddingHorizontal: 16, paddingVertical: 16, gap: 12 },
   empty: { paddingVertical: 24, textAlign: "center", fontSize: 14, fontWeight: "600", color: C.mute },
   row: { flexDirection: "row" },

@@ -270,6 +270,7 @@ function CodeBoxes({
         autoCapitalize="none"
         returnKeyType="done"
         caretHidden
+        selectionColor="transparent"
         accessibilityLabel="Verification code"
         accessibilityHint={`Enter the ${length} digit code from your email`}
         style={styles.codeInput}
@@ -793,7 +794,13 @@ const styles = StyleSheet.create({
     includeFontPadding: false,
   },
   codeInput: {
-    opacity: 0,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    color: "transparent",
+    backgroundColor: "transparent",
   },
   hint: {
     flexDirection: "row",

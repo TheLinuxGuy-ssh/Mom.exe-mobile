@@ -1,9 +1,9 @@
 import { Feather } from "@expo/vector-icons";
-import { type ReactNode, useEffect, useMemo, useState } from "react";
-import { Animated, PanResponder, Pressable, StyleSheet, Text, View } from "react-native";
+import { type ReactNode } from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { Modal } from "@/components/mom/modal";
+import { BottomSheet } from "@/components/mom/bottom-sheet";
 import { C, R } from "@/constants/mom";
 
 /** The ink frame drawn around the sheet. Kept as a solid shape rather than a border so the
@@ -11,71 +11,42 @@ import { C, R } from "@/constants/mom";
 const FRAME = 3;
 
 /**
- * The bottom sheet every selector shares. It owns the grab handle, the dismiss-on-swipe-down
- * gesture and the framed paper look, so the time and timezone pickers stay identical.
+ * The bottom sheet every selector shares. It owns the grab handle, the framed paper look and the
+ * padding around the home indicator; the entrance, drag-to-dismiss and backdrop come from
+ * `BottomSheet`, so the time and timezone pickers stay identical.
  */
 export function Sheet({
   open,
   onClose,
   title,
+  dismissible = true,
   children,
 }: {
   open: boolean;
   onClose: () => void;
   title: string;
+  dismissible?: boolean;
   children: ReactNode;
 }) {
   const insets = useSafeAreaInsets();
-  const [translateY] = useState(() => new Animated.Value(0));
-
-  useEffect(() => {
-    if (open) translateY.setValue(0);
-  }, [open, translateY]);
-
-  const pan = useMemo(
-    () =>
-      PanResponder.create({
-        onMoveShouldSetPanResponder: (_e, g) => g.dy > 6 && Math.abs(g.dy) > Math.abs(g.dx),
-        onPanResponderMove: (_e, g) => {
-          if (g.dy > 0) translateY.setValue(g.dy);
-        },
-        onPanResponderRelease: (_e, g) => {
-          if (g.dy > 110 || g.vy > 0.7) {
-            Animated.timing(translateY, {
-              toValue: 600,
-              duration: 180,
-              useNativeDriver: true,
-            }).start(() => onClose());
-          } else {
-            Animated.spring(translateY, { toValue: 0, useNativeDriver: true }).start();
-          }
-        },
-        onPanResponderTerminate: () => {
-          Animated.spring(translateY, { toValue: 0, useNativeDriver: true }).start();
-        },
-      }),
-    [translateY, onClose]
-  );
 
   return (
-    <Modal open={open} onClose={onClose} align="sheet">
-      <Animated.View style={{ transform: [{ translateY }] }}>
-        <View style={styles.frame}>
-          <View style={[styles.inner, { paddingBottom: insets.bottom + 14 }]}>
-            <View style={styles.grab} {...pan.panHandlers}>
-              <View style={styles.handle} />
-              <View style={styles.head}>
-                <Text style={styles.title}>{title}</Text>
-                <Pressable onPress={onClose} hitSlop={8} accessibilityLabel="close">
-                  <Feather name="x" size={20} color={C.ink} />
-                </Pressable>
-              </View>
+    <BottomSheet open={open} onClose={onClose} dismissible={dismissible}>
+      <View style={styles.frame}>
+        <View style={[styles.inner, { paddingBottom: insets.bottom + 14 }]}>
+          <View style={styles.grab}>
+            <View style={styles.handle} />
+            <View style={styles.head}>
+              <Text style={styles.title}>{title}</Text>
+              <Pressable onPress={onClose} hitSlop={8} accessibilityLabel="close">
+                <Feather name="x" size={20} color={C.ink} />
+              </Pressable>
             </View>
-            <View style={styles.body}>{children}</View>
           </View>
+          <View style={styles.body}>{children}</View>
         </View>
-      </Animated.View>
-    </Modal>
+      </View>
+    </BottomSheet>
   );
 }
 
